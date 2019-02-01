@@ -1,2 +1,5 @@
 # DNA-Processing
-This assignment works with DNA and the four types of nucleotides. 
+
+Assignment 2 of Learn to Program: The Fundamentals on Coursera
+
+This assignment works with the four types of DNA nucleotides. 
