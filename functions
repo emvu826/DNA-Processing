@@ -1,0 +1,152 @@
+def get_length(dna):
+    """ (str) -> int
+
+    Return the length of the DNA sequence dna.
+
+    >>> get_length('ATCGAT')
+    6
+    >>> get_length('ATCG')
+    4
+    """
+
+    return len(dna)
+
+def is_longer(dna1, dna2):
+    """ (str, str) -> bool
+
+    Return True if and only if DNA sequence dna1 is longer than DNA sequence
+    dna2.
+
+    >>> is_longer('ATCG', 'AT')
+    True
+    >>> is_longer('ATCG', 'ATCGGA')
+    False
+    """
+
+    return get_length(dna1) > get_length(dna2)  
+
+def count_nucleotides(dna, nucleotide):
+    """ (str, str) -> int
+
+    Return the number of occurrences of nucleotide in the DNA sequence dna.
+
+    >>> count_nucleotides('ATCGGC', 'G')
+    2
+    >>> count_nucleotides('ATCTA', 'G')
+    0
+    """
+    occurences = 0 
+
+    for char in dna:
+        if char in nucleotide:
+            occurences = occurences + 1
+
+    return occurences
+    
+    
+def contains_sequence(dna1, dna2):
+    """ (str, str) -> bool
+
+    Return True if and only if DNA sequence dna2 occurs in the DNA sequence
+    dna1.
+
+    >>> contains_sequence('ATCGGC', 'GG')
+    True
+    >>> contains_sequence('ATCGGC', 'GT')
+    False
+
+    """
+
+    if dna1.find(dna2) >= 0:
+        
+        return True
+    
+    else:
+        return False
+
+def is_valid_sequence(dna):
+    """ (str) -> bool
+
+    Return True if and only if DNA sequence dna contains no characters
+    other than 'A', 'T', 'C', and 'G'.
+
+    >>> is_valid_sequence('ATCGG')
+    True
+    >>> is_valid_sequence('ATCGZ')
+    False
+
+    """
+
+    is_valid = True
+    valid_string = 'atcgATCG'
+
+    for char in dna:
+        if char not in valid_string:
+            return False
+        else:
+            return is_valid
+        
+def insert_sequence(dna1, dna2, index):
+    """ (str, str, int) -> str
+
+    Return the DNA sequence obtained by inserting the second DNA sequence
+    into the first DNA sequence at the given index.
+
+    >>> insert_sequence('CCGG', 'AT', 2)
+    CCATGG
+    >>> insert_sequence('ATCA', 'GG', 1)
+    ATGGCA
+    """
+    return dna1[0:index] + dna2 + dna1[index:get_length(dna1)]
+
+def get_complement(dna):
+    """(str) -> str
+
+    Return the nucleotide's complement. (complements: A and T, C and G)
+
+    >>> get_complement('A')
+    T
+    >>> get_complement('C')
+    G
+    """
+
+    if not is_valid_sequence(dna):
+        return False
+    if not get_length(dna) == 1:
+        return False
+
+    complement = ''
+    
+    for char in dna:
+        if char in 'aA':
+            complement = complement + 'T'
+        if char in 'tT':
+            complement = complement + 'A'
+        if char in 'cC':
+            complement = complement + 'G'
+        if char in 'gG':
+            complement = complement + 'C'
+
+    return complement
+
+def get_complementary_sequence(dna):
+    """(str) -> str
+    Return the DNA sequence that is complementary to the given DNA sequence.
+
+    >>> get_complementary_sequence('AT')
+    'TA'
+    >>> get_complementary_sequence("CG")
+    'GC'
+    >>> get_complementary_sequence("ACGT")
+    'TGCA'
+    """
+    
+    complement = ''
+    
+    if not is_valid_sequence(dna):
+        return False
+
+    for char in dna:
+        complement = complement + get_complement(char)
+
+    return complement 
